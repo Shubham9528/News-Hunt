@@ -3,15 +3,18 @@ import axios from 'axios';
 
 // const API_KEY_NEWS_API = "d9dfbc339aba4d978d9a4f47873e0f80";
 const API_KEY_MEDIASTACK="26fafcb475df43e2254fcfed21fe74cd";
-export default function Card() {
+export default function Card({ search }) {
     const [news, setNews] = useState([]);
+    console.log(search);
+    
 
     useEffect(() => {
         let intervalId;
 
         async function getNews() {
             try {
-                const url = `http://api.mediastack.com/v1/news?access_key=${API_KEY_MEDIASTACK}&languages=en&countries=us&categories=business,technology,general,business,entertainment,health,science,technology,sports&limit=100`; 
+                {/*Categories:business,technology,general,business,entertainment,health,science,technology,sports*/ }
+                const url = `http://api.mediastack.com/v1/news?access_key=${API_KEY_MEDIASTACK}&languages=en&countries=us&categories=${search}&limit=100`; 
                 const response = await axios.get(url);
                 // setNews(response.data.articles);//for news_api
                 setNews(response.data.data);//for media_stack
@@ -22,15 +25,11 @@ export default function Card() {
 
        
         getNews();
-
-
         // intervalId = setInterval(getNews, 60000);
-
-      
-        return () => {
-            clearInterval(intervalId);
+           return () => {
+            // clearInterval(intervalId);
         };
-    }, []); 
+    }, [search]); 
 
     return (
         <div className="flex flex-wrap justify-center gap-8">
