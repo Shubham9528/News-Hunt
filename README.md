@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+### 📰 News Hunt
+Welcome to News Hunt, a React-based application that fetches and displays the latest news articles based on user input. The app integrates with the Mediastack API to provide a seamless news browsing experience.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+![news hunt](https://github.com/user-attachments/assets/aa9c3051-5297-4c25-a003-f9b74a1530d2)
 
-In the project directory, you can run:
 
-### `npm start`
+## 🌟 Features
+- Dynamic Search: Users can search for news based on categories like business, technology, health, etc.
+- Responsive Design: The app is styled using Tailwind CSS, ensuring a responsive and attractive user interface.
+- Real-time Updates: Fetches the latest news whenever a new search is submitted.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🏠App Component 
+File: "App.js"
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Concepts:
+-  Parent Component: The App component is the root component in a React application. It orchestrates the rendering of child components and manages the overall state.
+-  State Management: The useState hook is used here to manage the state of the submittedSearch variable, which stores the user's search input.
+-  Component Composition: The App component includes other components (Header, SearchBox, and Card) as its children, thereby composing the application's UI.
 
-### `npm test`
+Explanation:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The App component serves as the main container of the application. It handles the following tasks:
+- State Management: useState is used to track the user's search input. This state is passed as a prop to the Card component, which uses it to fetch and display relevant news.
+- Styling and Layout: The component utilizes Tailwind CSS for responsive design. The header is fixed at the top, with a sticky search bar positioned below it, ensuring a smooth user experience.
+- Component Rendering: The Header component displays the app's title, the SearchBox allows the user to input a search term, and the Card component displays the fetched news.
 
-### `npm run build`
+## 📰Header Component
+File: "Header.js"
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Concepts:
+-  Static Content: The Header component is a simple functional component that returns static content. In React, functional components are the simplest way to create components that only render UI and do not manage any state.
+-  Component Reusability: The Header component is a reusable piece of UI that can be used in different parts of the app if needed.
+-  Component Composition: The App component includes other components (Header, SearchBox, and Card) as its children, thereby composing the application's UI.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Explanation:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The Header component is designed to display the title of the application. It’s a simple functional component without any state or props. The styling is minimal and focuses on aligning the title at the center of the screen.
+```
+import React from 'react';
 
-### `npm run eject`
+export default function Header() {
+    return (    
+        <div className="">
+            <h1>News Hunt</h1> 
+        </div>
+    );
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔍 SearchBox Component
+File: "SearchBox.js"
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Concepts:
+-  Controlled Components: In React, a controlled component is an input element whose value is controlled by React state. The SearchBox component uses a controlled input field.
+-  State Management: The useState hook is used to manage the state of the search input. The search state variable holds the value entered by the user.
+-  Event Handling: The component handles user input through event handlers (handleChange and handleSubmit), allowing the app to respond to user actions.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Explanation:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The SearchBox component allows the user to input a search term. It maintains an internal state (search) to track the value entered by the user. When the form is submitted, the search term is passed to the parent App component via the setSubmittedSearch prop.
 
-## Learn More
+Key Feature:
+- Controlled Input: The input field’s value is linked to the component’s state, ensuring that React controls the input.
+- Form Submission: On form submission, the handleSubmit function is called, which in turn updates the submittedSearch state in the App component.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📄Card Component
+File: "Card.js"
 
-### Code Splitting
+Concepts:
+-  API Integration: The Card component fetches data from the Mediastack API using Axios, a popular HTTP client for making API requests in JavaScript.
+-  Effect Hook (useEffect): React’s useEffect hook is used to handle side effects, such as fetching data from an external API. It runs the API call whenever the search prop changes.
+-  Rendering Data: The component maps over the fetched news data and renders each item as a card, displaying details like the title, author, and description.
+-   Conditional Rendering: The component conditionally renders elements (like images) based on the availability of the data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Explanation:
 
-### Analyzing the Bundle Size
+The Card component is responsible for fetching and displaying news articles based on the user's search term. It uses the Mediastack API to get the latest news and displays it in a grid of cards.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Key Feature:
+- API Call: The component fetches data using Axios. It builds the API request URL dynamically based on the search term provided by the user.
+- Effect Hook: The useEffect hook ensures that the news is fetched every time the search term changes.
+- Card Layout: Each news article is displayed in a card format, with an optional image at the top, followed by the author, title, and description.
 
-### Making a Progressive Web App
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##📝 License
+This project is licensed under the --- License.
+  
